@@ -1,0 +1,61 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cloudops-api
+  namespace: cloudops
+  labels:
+    app: cloudops-api
+    app.kubernetes.io/name: cloudops-api
+    app.kubernetes.io/part-of: cloudops-enterprise-platform
+    app.kubernetes.io/component: backend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: cloudops-api
+  template:
+    metadata:
+      labels:
+        app: cloudops-api
+        app.kubernetes.io/name: cloudops-api
+        app.kubernetes.io/part-of: cloudops-enterprise-platform
+        app.kubernetes.io/component: backend
+    spec:
+      containers:
+        - name: cloudops-api
+          image: cloudops-enterprise-platform:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 8000
+              protocol: TCP
+          envFrom:
+            - configMapRef:
+                name: cloudops-config
+            - secretRef:
+                name: cloudops-secrets
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 500m
+              memory: 512Mi
+          readinessProbe:
+            httpGet:
+              path: /health/ready
+              port: 8000
+            initialDelaySeconds: 5
+            periodSeconds: 10
+            timeoutSeconds: 3
+            failureThreshold: 3
+            successThreshold: 1
+          livenessProbe:
+            httpGet:
+              path: /health/live
+              port: 8000
+            initialDelaySeconds: 3
+            periodSeconds: 15
+            timeoutSeconds: 3
+            failureThreshold: 3
+            successThreshold: 1

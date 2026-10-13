@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: cloudops
+  labels:
+    name: cloudops
+    app.kubernetes.io/name: cloudops-enterprise-platform
+    app.kubernetes.io/part-of: cloudops-enterprise-platform

@@ -1,0 +1,33 @@
+# ==============================================================================
+# CloudOps Enterprise Platform - Example Terraform Variables Configuration
+# ==============================================================================
+# INSTRUCTIONS:
+# 1. Copy this template to create your local terraform.tfvars:
+#      cp terraform.tfvars.example terraform.tfvars
+# 2. Update the values below with your specific environment configurations.
+# 3. DO NOT commit terraform.tfvars containing real credentials to version control.
+# ==============================================================================
+
+# Target AWS region
+aws_region = "us-east-1"
+
+# Project naming and resource tagging prefix
+project_name = "cloudops-enterprise"
+
+# EC2 instance sizing (t2.micro is Free Tier eligible on standard AWS accounts)
+instance_type = "t2.micro"
+
+# Trusted administrative CIDR block allowed SSH (port 22) access.
+# Replace with your external IP address formatted as a CIDR /32.
+# Find your current public IP via: curl https://checkip.amazonaws.com
+# Example: "203.0.113.50/32"
+trusted_ssh_cidr = "YOUR_PUBLIC_IP/32"
+
+# Name of an existing EC2 Key Pair in your AWS account in the chosen region.
+# Example: "cloudops-admin-key"
+key_pair_name = "your-ec2-key-pair-name"
+
+# Secure password for the PostgreSQL database container (Sensitive).
+# Ensure you use a strong, generated password.
+# Example: "SuperSecret_P@ssw0rd_2026!"
+db_password = "YOUR_SECURE_DATABASE_PASSWORD"

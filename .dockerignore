@@ -1,0 +1,41 @@
+# Virtual Environments & Git
+.venv/
+venv/
+.git/
+.gitignore
+
+# Environment & Secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.crt
+
+# Python Caches & Build
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyd
+build/
+dist/
+*.egg-info/
+
+# Pytest & Coverage
+.pytest_cache/
+.coverage
+htmlcov/
+tests/
+
+# Terraform & IaC
+.terraform/
+*.tfstate
+*.tfstate.*
+
+# IDE & OS Artifacts
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.log
+README.md
